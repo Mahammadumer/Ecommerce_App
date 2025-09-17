@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import EcoApp.demo.config.BusinessException;
-import EcoApp.demo.config.ResourceNotFoundException;
+import EcoApp.demo.config.ResourcenotFoundException;
 import EcoApp.demo.entity.Product;
 import EcoApp.demo.repository.ProductRepository;
 
@@ -38,7 +38,7 @@ public class ProductService {
         return repo.findById(id)
                    .orElseThrow(() -> {
                        log.error("Product not found: {}", id);
-                       return new ResourceNotFoundException("Product not found: " + id);
+                       return new ResourcenotFoundException("Product not found: " + id);
                    });
     }
 
@@ -46,7 +46,7 @@ public class ProductService {
         Product existingProduct = repo.findById(id)
                                       .orElseThrow(() -> {
                                           log.error("Attempted to update non-existing product ID: {}", id);
-                                          return new ResourceNotFoundException("Product not found: " + id);
+                                          return new ResourcenotFoundException("Product not found: " + id);
                                       });
 
         log.info("Updating product ID: {}", id);
@@ -64,7 +64,7 @@ public class ProductService {
         Product product = repo.findById(id)
                               .orElseThrow(() -> {
                                   log.error("Attempted to delete non-existing product ID: {}", id);
-                                  return new ResourceNotFoundException("Product not found: " + id);
+                                  return new ResourcenotFoundException("Product not found: " + id);
                               });
 
         log.info("Deleting product ID: {}", id);
