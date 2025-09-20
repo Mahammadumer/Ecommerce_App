@@ -11,7 +11,7 @@ import EcoApp.demo.service.ProductService;
 
 @RestController
 @RequestMapping("/products")
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:5173") // More secure than "*"
 public class ProductController {
 
     private final ProductService productService;
